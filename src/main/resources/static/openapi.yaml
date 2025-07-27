@@ -1,0 +1,191 @@
+openapi: 3.0.3
+info:
+  title: Employee Management System API
+  description: REST API for managing employees
+  version: "1.0.0"
+
+servers:
+  - url: http://localhost:8080/api
+    description: Local server
+
+paths:
+  /employees:
+    get:
+      summary: Get all employees
+      operationId: getAllEmployees
+      tags:
+        - Employees
+      responses:
+        '200':
+          description: A list of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+    post:
+      summary: Add a new employee
+      operationId: addEmployee
+      tags:
+        - Employees
+      requestBody:
+        description: Employee object to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeInput'
+            example:
+              name: Astha Jain
+              email: asthajain301@gmail.com
+              department: Engineering
+              salary: 50000.0
+              joiningDate: 2025-01-01
+      responses:
+        '201':
+          description: Employee created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '400':
+          description: Invalid input
+
+  /employees/{id}:
+    get:
+      summary: Get employee by ID
+      operationId: getEmployeeById
+      tags:
+        - Employees
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Employee ID
+      responses:
+        '200':
+          description: Employee found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+
+    put:
+      summary: Update employee by ID
+      operationId: updateEmployee
+      tags:
+        - Employees
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Employee ID
+      requestBody:
+        description: Employee object to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeInput'
+            example:
+              name: Sakshi Sharma
+              email: sakshisharma301@gmail.com
+              department: Marketing
+              salary: 60000.0
+              joiningDate: 2024-05-15
+      responses:
+        '200':
+          description: Employee updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+
+    delete:
+      summary: Delete employee by ID
+      operationId: deleteEmployee
+      tags:
+        - Employees
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Employee ID
+      responses:
+        '204':
+          description: Employee deleted successfully
+        '404':
+          description: Employee not found
+
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Astha Jain
+        email:
+          type: string
+          format: email
+          example: asthajain301@gmail.com
+        department:
+          type: string
+          example: Engineering
+        salary:
+          type: number
+          format: double
+          example: 50000.0
+        joiningDate:
+          type: string
+          format: date
+          example: 2025-01-01
+      required:
+        - id
+        - name
+        - email
+        - salary
+
+    EmployeeInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Astha Jain
+        email:
+          type: string
+          format: email
+          example: asthajain301@gmail.com
+        department:
+          type: string
+          example: Engineering
+        salary:
+          type: number
+          format: double
+          example: 50000.0
+        joiningDate:
+          type: string
+          format: date
+          example: 2025-01-01
+      required:
+        - name
+        - email
+        - salary
