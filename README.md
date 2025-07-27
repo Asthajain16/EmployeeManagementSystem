@@ -20,8 +20,7 @@ Spring Boot REST API for managing employees with full CRUD support.
     API: http://localhost:8080/api/employees
     
     Swagger UI: http://localhost:8080/swagger-ui/index.html
-    <img width="1649" height="887" alt="image" src="https://github.com/user-attachments/assets/7cb0e443-18f6-419f-8326-d512cc1b5054" />
-
+    
     Base URL: `http://localhost:8080/api/employees`
 
     | Method | Endpoint             | Description               |
