@@ -1,4 +1,4 @@
-package com.assignment.EmployeeManagementSystem.Cotroller;
+package com.assignment.EmployeeManagementSystem.Controller;
 
 import com.assignment.EmployeeManagementSystem.Model.Employee;
 import com.assignment.EmployeeManagementSystem.Repository.EmployeeRepository;
